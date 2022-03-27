@@ -9,7 +9,6 @@ function* getNavigation() {
     const response: ListResponse<Navigation> = yield call(
       getNavigationApi.getAll
     );
-    console.log(response);
     yield put(navigationActions.getNavigationSuccess(response));
   } catch (error) {
     console.log("Failed to get Navigation", error);

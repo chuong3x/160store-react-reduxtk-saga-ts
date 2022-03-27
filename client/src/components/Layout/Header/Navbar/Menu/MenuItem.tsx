@@ -2,43 +2,35 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Menu.module.scss";
+import Menu from ".";
+import { Link } from "react-router-dom";
 
 interface PropsMenuItem {
   name: string;
   title: string;
   isDropRight: boolean;
+  linkTo: string;
 }
 
-export default function MenuItem({ name, title, isDropRight }: PropsMenuItem) {
+export default function MenuItem({
+  name,
+  title,
+  isDropRight,
+  linkTo,
+}: PropsMenuItem) {
   return isDropRight ? (
     <>
       <div className={styles.menuItemLink}>
         {title}
         <div className={styles.menuItemLinkIcon}>
-          <FontAwesomeIcon icon={faAngleRight} />
+          <FontAwesomeIcon icon={faAngleRight} size="sm" />
         </div>
       </div>
-      <ul className={styles.subMenu}>
-        <li className={styles.menuItem}>
-          <a href="/" className={styles.menuItemLink}>
-            ÁO SƠ MI
-          </a>
-        </li>
-        <li className={styles.menuItem}>
-          <a href="/" className={styles.menuItemLink}>
-            ÁO THUN
-          </a>
-        </li>
-        <li className={styles.menuItem}>
-          <a href="/" className={styles.menuItemLink}>
-            ÁO KHOÁC PHAO NATIONAL
-          </a>
-        </li>
-      </ul>
+      <Menu menuFor={name} isDropRight={isDropRight} />
     </>
   ) : (
-    <a className={styles.menuItemLink} href="/">
+    <Link className={styles.menuItemLink} to={linkTo}>
       {title}
-    </a>
+    </Link>
   );
 }

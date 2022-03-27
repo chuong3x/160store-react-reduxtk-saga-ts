@@ -8,7 +8,6 @@ function* getCategory() {
     const response: ListResponse<Category> = yield call(
       getNavigationApi.getCategory
     );
-    console.log(response);
     yield put(menuActions.getCategorySuccess(response));
   } catch (err) {
     console.log("Failed to get Navigation", err);

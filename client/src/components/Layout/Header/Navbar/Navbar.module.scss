@@ -44,10 +44,9 @@
 
         &:hover {
           & > ul {
-            display: flex;
-            flex-direction: column;
+            transform: rotate3d(0, 0, 0, 0);
           }
-          & > div i {
+          & > div div {
             transform: rotateZ(180deg);
             transition: all linear 0.15s;
           }

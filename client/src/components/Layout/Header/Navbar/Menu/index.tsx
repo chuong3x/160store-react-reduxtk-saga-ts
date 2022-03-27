@@ -24,15 +24,15 @@ export default function Menu({ menuFor, isDropRight }: PropsMenu) {
             <li
               key={menuItem.name}
               className={clsx(styles.menuItem, {
-                [styles.menuItemDropright]: isDropRight,
+                [styles.menuItemDropright]: menuItem.isDropRight,
               })}
             >
-              {isDropRight ? (
+              {menuItem.isDropRight ? (
                 <MenuItem
-                  key={menuItem.name}
                   name={menuItem.name}
                   title={menuItem.title}
                   isDropRight={true}
+                  linkTo={menuItem.linkTo}
                 />
               ) : (
                 <Link className={styles.menuItemLink} to={menuItem.linkTo}>
