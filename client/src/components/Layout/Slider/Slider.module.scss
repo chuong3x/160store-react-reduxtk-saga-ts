@@ -1,0 +1,59 @@
+@import "../../../scss/variables";
+.slider {
+  display: block;
+  width: 100%;
+  background-color: #7f7f7f36;
+  height: 750px;
+
+  &Wrapper {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+  .swiper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    &Button {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50px;
+      width: 50px;
+      border: 1px solid $text-color;
+      cursor: pointer;
+      z-index: 2;
+
+      &Next {
+        top: 50%;
+        right: 14px;
+        transform: translateY(-50%);
+      }
+      &Prev {
+        top: 50%;
+        left: 14px;
+        transform: translateY(-50%);
+      }
+    }
+    &Slider {
+      display: block;
+      width: 100%;
+      height: 100%;
+      &Item {
+        display: block;
+        height: 100%;
+        width: 100%;
+        &Img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}

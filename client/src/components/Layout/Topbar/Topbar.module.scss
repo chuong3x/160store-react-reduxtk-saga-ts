@@ -1,0 +1,53 @@
+@import "../../../scss/variables";
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #7f7f7f;
+  height: $topbar-height;
+  padding: 0 50px;
+
+  &Content {
+    display: block;
+    height: 100%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    color: $white-color;
+    font-weight: 700;
+
+    p {
+      display: block;
+      height: 100%;
+      margin: 0;
+      line-height: $topbar-height;
+    }
+  }
+
+  &Hotline {
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    &__phone {
+      display: flex;
+      height: 22px;
+      width: 22px;
+      border: 1px solid $white-color;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      color: $white-color;
+    }
+    &__text {
+      display: block;
+      height: 100%;
+      margin-left: 10px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: $topbar-height;
+      color: $white-color;
+    }
+  }
+}

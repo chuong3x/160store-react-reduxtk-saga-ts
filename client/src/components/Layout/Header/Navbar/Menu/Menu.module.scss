@@ -1,0 +1,64 @@
+@import "../../../../../scss/variables";
+.menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 45px;
+  background-color: $white-color;
+  font-weight: 500;
+  width: max-content;
+  box-shadow: 1px 2px 5px rgb(0 0 0 / 5%);
+  animation: showMenu linear 0.2s;
+  transition: all linear 0.15s;
+  transform-origin: top;
+  border-top: 2px solid rgba($color: #000000, $alpha: 0.6);
+
+  &Item {
+    border-bottom: 1px solid rgba($color: $text-color, $alpha: 0.1);
+
+    &Dropright {
+      position: relative;
+
+      &:hover {
+        & > ul {
+          display: flex;
+          flex-direction: column;
+        }
+        & > div i {
+          transform: rotateZ(180deg);
+          transition: all linear 0.15s;
+        }
+      }
+    }
+    &Link {
+      display: flex;
+      text-align: left;
+      height: 20px;
+      padding: 9px 18px;
+      width: calc(100% - 36px);
+      color: $text-color;
+      font-family: "Montserrat", sans-serif;
+      font-size: 14px;
+
+      &Icon {
+        margin-left: 4px;
+      }
+
+      &:hover {
+        color: $hover-color;
+        transition: all linear 0.15s;
+      }
+    }
+  }
+  .subMenu {
+    position: absolute;
+    display: none;
+    top: 0 !important;
+    left: 101% !important;
+    background-color: $white-color;
+    font-weight: 500;
+    width: max-content;
+    box-shadow: 1px 2px 5px rgb(0 0 0 / 5%);
+    border-top: 2px solid rgba($color: #000000, $alpha: 0.6);
+  }
+}

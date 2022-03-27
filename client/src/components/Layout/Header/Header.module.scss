@@ -1,0 +1,90 @@
+@import "../../../scss/variables";
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: $header-height;
+  width: 100%;
+  z-index: 99;
+
+  &Logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0 100px;
+
+    &Link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      cursor: pointer;
+
+      &Img {
+        display: block;
+        height: 60px;
+        padding: 5px 0;
+      }
+    }
+  }
+
+  .util {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 300px;
+    height: 100%;
+    margin: 0 100px;
+
+    &User {
+      margin-right: 10px;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    &Search {
+      margin: 0 10px;
+      cursor: pointer;
+      font-size: 24px;
+
+      &:hover {
+        transform: rotateZ(-10deg);
+      }
+    }
+
+    &Cart {
+      position: relative;
+      margin-left: 10px;
+      cursor: pointer;
+
+      &:hover {
+        & > a {
+          animation: numberChange 0.2s linear;
+        }
+      }
+      &Icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+      }
+      &Counter {
+        position: absolute;
+        top: 8px;
+        width: 100%;
+        text-align: center;
+        font-weight: 600;
+        font-family: "Montserrat", sans-serif;
+        font-size: 14px;
+
+        &:hover {
+          color: $hover-color;
+        }
+
+        &Text {
+          transition: transform 0.15s linear;
+        }
+      }
+    }
+  }
+}
