@@ -1,13 +1,23 @@
 import axiosClient from "./axiosClient";
 
-import { ListResponse, Product, ListParams, ProductCategory } from "models";
+import {
+  ListResponse,
+  Product,
+  ListParams,
+  SectionProductsPayload,
+} from "models";
 
 const getProductApi = {
-  getAll(): Promise<ListResponse<Product>> {
+  getAll(params: ListParams): Promise<ListResponse<Product>> {
     const url = "/products";
-    return axiosClient.get(url);
+    return axiosClient.get(url, { params });
+  },
+  getByCategory({
+    name,
+    params,
+  }: SectionProductsPayload): Promise<ListResponse<Product>> {
+    const url = `/collection/${name}`;
+    return axiosClient.get(url, { params });
   },
 };
-
 export default getProductApi;
-

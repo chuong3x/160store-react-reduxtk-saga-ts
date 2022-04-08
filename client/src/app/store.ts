@@ -4,6 +4,10 @@ import rootSaga from "./rootSaga";
 
 import navigationReducer from "../features/navigation/navigationSlice";
 import menuReducer from "features/menu/menuSlice";
+import siteReducer from "features/site/siteSlice";
+import searchReducer from "features/site/components/SearchForm/searchSlice";
+import sliderReducer from "features/slider/sliderSlice";
+import sectionReducer from "features/section/sectionSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -11,6 +15,10 @@ export const store = configureStore({
   reducer: {
     navigation: navigationReducer,
     menu: menuReducer,
+    site: siteReducer,
+    search: searchReducer,
+    slider: sliderReducer,
+    section: sectionReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

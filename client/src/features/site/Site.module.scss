@@ -1,0 +1,65 @@
+@import "../../scss/variables";
+.site {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transform: translateX(500px);
+  transition: all linear 0.3s;
+  z-index: -1;
+
+  &TransX {
+    transform: translateX(0) !important;
+    z-index: 101 !important;
+  }
+
+  .form {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 500px;
+    background-color: $white-color;
+    &Close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      width: 40px;
+      cursor: pointer;
+
+      &:hover {
+        transition: transform 0.15s linear;
+        transform: scale(1.2);
+        transform-origin: center;
+      }
+    }
+  }
+  .overlay {
+    display: block;
+    flex: 1;
+    background-color: rgba($color: $text-color, $alpha: 0.5);
+    opacity: 0;
+    transition: all linear 0.3s;
+
+    &::before {
+      content: "";
+      display: block;
+      height: 100%;
+      width: 500px;
+      position: absolute;
+      right: 100%;
+      background-color: rgba($color: $text-color, $alpha: 0.5);
+      top: 0;
+    }
+
+    &Show {
+      opacity: 1 !important;
+    }
+  }
+}

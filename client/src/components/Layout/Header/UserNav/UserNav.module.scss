@@ -11,6 +11,10 @@
     margin-right: 10px;
     cursor: pointer;
     font-size: 24px;
+
+    &Icon {
+      color: $text-color;
+    }
   }
 
   &Search {
@@ -29,7 +33,7 @@
     cursor: pointer;
 
     &:hover {
-      & > a {
+      & > div:last-child {
         animation: numberChange 0.2s linear;
       }
     }

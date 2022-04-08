@@ -7,27 +7,38 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./UserNav.module.scss";
+import { useAppDispatch } from "app/hooks";
+import { siteActions } from "features/site/siteSlice";
+import { Link } from "react-router-dom";
 
 export default function UserNav() {
+  const dispatch = useAppDispatch();
+
+  const handleShowSite = (showFor: string) => {
+    dispatch(siteActions.show(showFor));
+  };
   return (
     <div className={styles.util}>
       <div className={styles.utilUser}>
-        <div className={styles.utilUserIcon}>
+        <Link to="/login" className={styles.utilUserIcon}>
           <FontAwesomeIcon icon={faCircleUser} size="1x" />
-        </div>
+        </Link>
       </div>
       <div className={styles.utilSearch}>
-        <div className={styles.utilSearchIcon}>
+        <div
+          className={styles.utilSearchIcon}
+          onClick={() => handleShowSite("search")}
+        >
           <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
         </div>
       </div>
-      <div className={styles.utilCart}>
+      <div className={styles.utilCart} onClick={() => handleShowSite("cart")}>
         <div className={styles.utilCartIcon}>
           <SVGCart />
         </div>
-        <a className={styles.utilCartCounter} href="/">
+        <div className={styles.utilCartCounter}>
           <span className={styles.utilCartCounterText}>0</span>
-        </a>
+        </div>
       </div>
     </div>
   );

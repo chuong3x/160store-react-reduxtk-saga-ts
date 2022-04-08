@@ -13,9 +13,12 @@ interface PropsMenu {
 }
 
 export default function Menu({ menuFor, isDropRight }: PropsMenu) {
+  const dispatch = useAppDispatch();
   const categories = useAppSelector(selectMenu);
   const menuState = categories.find((category) => category.name === menuFor);
-
+  useEffect(() => {
+    dispatch(menuActions.getCategory());
+  }, [dispatch]);
   return (
     <ul className={clsx(styles.menu, { [styles.subMenu]: isDropRight })}>
       {menuState &&

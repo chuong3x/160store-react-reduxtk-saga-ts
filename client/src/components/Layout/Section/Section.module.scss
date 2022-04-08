@@ -41,23 +41,39 @@
     &Item {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       align-items: center;
       height: 508px;
 
       &Image {
         display: block;
+        object-fit: cover;
         max-width: 100%;
+        margin: auto;
       }
-      &Name {
-        color: $text-color;
-        font-size: 14px;
-        padding-top: 20px;
-        margin-bottom: 4px;
+
+      &Info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &Name {
+          color: $text-color;
+          font-size: 14px;
+          padding-top: 20px;
+          margin-bottom: 4px;
+        }
+        &Price {
+          font-size: 14px;
+          font-weight: 700;
+        }
       }
-      &Price {
-        font-size: 14px;
-        font-weight: 700;
-      }
+    }
+    &Failed {
+      display: block;
+      height: 100%;
+      width: 100%;
+      margin: auto;
     }
   }
   .expland {
@@ -67,8 +83,8 @@
 
     &Button {
       display: block;
-      height: 14px;
-      width: 100px;
+      height: 34px;
+      width: 120px;
       padding: 8px;
       margin: 24px 0;
       font-family: "Montserrat", "sans-serif";

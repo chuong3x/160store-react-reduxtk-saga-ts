@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSwiper } from "swiper/react";
-import styles from "./Slider.module.scss";
+import styles from "../Slider.module.scss";
 import { faRightLong } from "@fortawesome/free-solid-svg-icons";
 
 export default function SlideNextButton() {

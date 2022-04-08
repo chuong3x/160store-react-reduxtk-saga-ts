@@ -1,3 +1,20 @@
+.app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+
+  &Container {
+    display: block;
+    width: 100%;
+    transform: translateX(0);
+    transition: transform linear 0.3s;
+  }
+  .transX {
+    transform: translateX(-500px);
+  }
+}
 .main {
   display: flex;
   flex-direction: column;

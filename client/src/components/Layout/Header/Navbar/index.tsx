@@ -15,7 +15,6 @@ export default function Navbar() {
 
   useEffect(() => {
     dispatch(navigationActions.getNavigation());
-    dispatch(menuActions.getCategory());
   }, [dispatch]);
 
   return (

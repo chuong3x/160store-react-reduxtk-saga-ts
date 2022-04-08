@@ -1,0 +1,124 @@
+@import "../../../../scss/variables";
+
+.group {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 60px 70px 250px;
+  font-family: "Montserrat", sans-serif;
+
+  &Title {
+    display: block;
+    height: 22px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  .search {
+    display: flex;
+    height: 55px;
+    width: 100%;
+    margin-top: 50px;
+    background-color: #f5f5f5;
+
+    &Input {
+      outline: none;
+      flex: 1;
+      font-size: 14px;
+      padding-left: 20px;
+      border: none;
+      background-color: transparent;
+    }
+    &Btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $text-color;
+      height: 100%;
+      width: 55px;
+      border: none;
+      opacity: 0.6;
+      cursor: pointer;
+    }
+  }
+  .result {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    height: max-content;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    // background-color: #f5f5f5;
+
+    &Group {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      width: 100%;
+      padding: 14px 0;
+      border-bottom: 1px solid #7f7f7f;
+
+      &Info {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: space-between;
+        height: 100%;
+        width: calc(100% - 40px);
+        font-size: 12px;
+
+        &Name {
+          display: block;
+          line-height: 1.4;
+          width: 100%;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          margin-bottom: 4px;
+          color: $text-color;
+          text-transform: uppercase;
+        }
+      }
+    }
+    &Image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      width: 40px;
+
+      &Img {
+        display: block;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    &More {
+      display: block;
+      height: 20px;
+      padding: 10px 0;
+      font-size: 14px;
+      align-self: center;
+
+      &Link {
+        color: $text-color;
+      }
+    }
+  }
+  .noResult {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    margin: 10px 0;
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 8%);
+
+    &Content {
+      font-size: 14px;
+    }
+  }
+}
