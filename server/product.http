@@ -1,0 +1,16 @@
+PUT http://localhost:5678/products/
+
+###
+GET http://localhost:5678/slides/
+
+###
+POST http://localhost:5678/slides/
+
+###
+GET http://localhost:5678/collection/yearend?limit=12
+content-type: application/json
+
+{
+    "": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}

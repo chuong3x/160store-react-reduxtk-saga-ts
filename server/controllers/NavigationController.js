@@ -3,7 +3,6 @@ import { NavigationModel } from '../models/NavigationModel.js';
 export const getNavigations = async (req, res) => {
   try {
     const navigations = await NavigationModel.find();
-    console.log('navigations', navigations);
     const response = {data: navigations}
     res.status(200).json(response);
   } catch (err) {
