@@ -1,4 +1,3 @@
-@import "../../../../scss/variables";
 .cart {
   display: flex;
   flex-direction: column;
@@ -97,7 +96,7 @@
         height: 100%;
         width: 48%;
         background-color: #000000;
-        color: $white-color;
+        color: var(--white-color);
         font-size: 12px;
       }
     }

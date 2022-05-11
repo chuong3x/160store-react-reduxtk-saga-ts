@@ -8,6 +8,7 @@ import siteReducer from "features/site/siteSlice";
 import searchReducer from "features/site/components/SearchForm/searchSlice";
 import sliderReducer from "features/slider/sliderSlice";
 import sectionReducer from "features/section/sectionSlice";
+import authReducer from "features/auth/authSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -19,6 +20,7 @@ export const store = configureStore({
     search: searchReducer,
     slider: sliderReducer,
     section: sectionReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

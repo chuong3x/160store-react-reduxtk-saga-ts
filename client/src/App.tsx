@@ -1,7 +1,7 @@
 import Footer from "components/Layout/Footer";
 import Header from "components/Layout/Header";
 import Topbar from "components/Layout/Topbar";
-import Login from "pages/Login";
+import Auth from "pages/Auth";
 import ProductDetail from "pages/ProductDetail";
 import styles from "./App.module.scss";
 import React, { useEffect } from "react";
@@ -27,10 +27,14 @@ function App() {
         <Header />
         <div className={styles.main}>
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Auth />} />
+            <Route path="/products" element={<Collection />} />
+
             <Route path="/products" element={<ProductDetail />}>
               <Route path=":name" element={<ProductDetail />}></Route>
             </Route>
+            <Route path="/products" element={<Collection />} />
+
             <Route path="/collection" element={<Collection />} />
             <Route path="/" element={<Home />} />
           </Routes>

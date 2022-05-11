@@ -1,10 +1,28 @@
 
+
 import { ProductModel } from '../models/ProductModel.js';
+
+function removeAccents(str) {
+  return str.normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/đ/g, 'd').replace(/Đ/g, 'D');
+}
 
 export const getProducts = async (req, res) => {
   const query = req.query;
   try {
-    const products = await ProductModel.find({"name" : new RegExp(query._filter, 'i') });
+    // const products = await ProductModel.find({"name" : new RegExp(query._filter, 'i') });
+    // const products = await ProductModel.find({
+    //   name: { $regex: query._filter, $options: "i"}
+    //   });
+    const result = await ProductModel.find({});
+    const products = result.filter((product)=> removeAccents(product.name).toLowerCase().includes(removeAccents(query._filter).toLowerCase())
+    )
+
+    // const products = await ProductModel.find({ $text : { $search : `\"${query._filter}\"`,
+    //   $caseSensitive: true,
+    //   $diacriticSensitive: false}})
+
     console.log(query._filter,products)
     res.status(200).json({data: products});
   } catch (err) {

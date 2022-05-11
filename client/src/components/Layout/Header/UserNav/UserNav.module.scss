@@ -1,4 +1,3 @@
-@import "../../../../scss/variables";
 .util {
   display: flex;
   align-items: center;
@@ -13,7 +12,7 @@
     font-size: 24px;
 
     &Icon {
-      color: $text-color;
+      color: var(--text-color);
     }
   }
 
@@ -53,7 +52,7 @@
       font-size: 14px;
 
       &:hover {
-        color: $hover-color;
+        color: --hover-color;
       }
 
       &Text {

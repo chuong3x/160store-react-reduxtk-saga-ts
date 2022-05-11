@@ -1,9 +1,8 @@
-@import "../../../../scss/variables";
-
 .nav {
   display: flex;
   height: 46px;
   flex: 1;
+  justify-content: center;
 
   &List {
     display: flex;
@@ -26,14 +25,14 @@
         align-items: center;
         height: 100%;
         font-size: 14px;
-        color: $text-color;
+        color: var(--text-color);
         font-weight: 600;
         letter-spacing: 0px;
         font-family: "Montserrat", sans-serif;
         transition: all linear 0.15s;
 
         &:hover {
-          color: $hover-color;
+          color: var(--hover-color);
         }
         &Icon {
           margin-left: 4px;

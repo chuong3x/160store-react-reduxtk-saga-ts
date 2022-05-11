@@ -1,9 +1,8 @@
-@import "../../../scss/variables";
 .header {
   position: relative;
   display: flex;
   align-items: center;
-  height: $header-height;
+  height: var(--header-height);
   width: 100%;
   z-index: 99;
 
@@ -23,7 +22,6 @@
       &Img {
         display: block;
         height: 60px;
-        padding: 5px 0;
       }
     }
   }

@@ -10,13 +10,21 @@ interface PropsResult {
 }
 
 export default function Result({ to }: PropsResult) {
-  const searchState = useAppSelector(selectSearch);
+  const searchStore = useAppSelector(selectSearch);
   const dispatch = useAppDispatch();
 
+  const [searchState, setSearchState] = useState(searchStore);
   const [showResult, setShowResult] = useState(searchState);
 
+  console.log("searchStore", searchStore);
+  console.log("searchState", searchState);
+
   useEffect(() => {
-    if (searchState.length > 5) {
+    setSearchState(searchStore);
+  }, [searchStore]);
+
+  useEffect(() => {
+    if (searchState && searchState.length > 5) {
       const term = [...searchState];
       term.length = 5;
       setShowResult(term);
@@ -24,7 +32,7 @@ export default function Result({ to }: PropsResult) {
       setShowResult(searchState);
     }
   }, [searchState]);
-  return searchState.length > 0 ? (
+  return showResult && searchState.length > 0 ? (
     <div className={styles.result}>
       {showResult.map((searchItem) => (
         <div key={searchItem._id} className={styles.resultGroup}>
