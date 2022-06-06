@@ -4,6 +4,7 @@ import menuSaga from "../features/menu/menuSaga";
 import searchSaga from "features/site/components/SearchForm/searchSaga";
 import sliderSaga from "features/slider/sliderSaga";
 import sectionProductsSaga from "features/section/sectionSaga";
+import authSaga from "features/auth/authSaga";
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     searchSaga(),
     sliderSaga(),
     sectionProductsSaga(),
+    authSaga(),
   ]);
 }

@@ -1,12 +1,11 @@
-import axiosClient from "./axiosClient"
-
+import { LoginPayload, LoginResponse } from "features/auth/authSlice";
+import axiosClient from "./axiosClient";
 
 const loginApi = {
-    login(){
-        const url = '/login'
-        return axiosClient.get(url)
-    }
-}
-
+  login(payload: LoginPayload): Promise<LoginResponse> {
+    const url = "/login";
+    return axiosClient.post(url, payload);
+  },
+};
 
 export default loginApi;

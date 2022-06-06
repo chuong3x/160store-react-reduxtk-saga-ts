@@ -1,6 +1,6 @@
 import Slider from "../features/slider";
-import Container from "../components/Layout/Container";
-import Sections from "../components/Layout/Section";
+import Container from "../components/Common/Container";
+import Sections from "../components/Common/Section";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useEffect } from "react";
 import { selectSlides, sliderActions } from "features/slider/sliderSlice";

@@ -1,19 +1,16 @@
-import Footer from "components/Layout/Footer";
-import Header from "components/Layout/Header";
-import Topbar from "components/Layout/Topbar";
-import Auth from "pages/Auth";
-import ProductDetail from "pages/ProductDetail";
-import styles from "./App.module.scss";
-import React, { useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import clsx from "clsx";
 
-import Home from "./pages/Home";
-import ScrollButton from "components/Common/ScrollButton";
-import Site from "features/site/Site";
 import { useAppSelector } from "app/hooks";
 import { selectSiteShow } from "features/site/siteSlice";
-import clsx from "clsx";
-import Collection from "pages/Collection";
+import { publicRoutes } from "routes";
+
+import styles from "./App.module.scss";
+
+import ScrollButton from "components/Common/ScrollButton";
+import Site from "features/site/Site";
+import MainLayout from "components/Layout/MainLayout";
+import OnlyContentLayout from "components/Layout/OnlyContentLayout";
 
 function App() {
   const siteIsShow = useAppSelector(selectSiteShow);
@@ -23,26 +20,28 @@ function App() {
       <div
         className={clsx(styles.appContainer, { [styles.transX]: siteIsShow })}
       >
-        <Topbar />
-        <Header />
         <div className={styles.main}>
           <Routes>
-            <Route path="/login" element={<Auth />} />
-            <Route path="/products" element={<Collection />} />
+            {publicRoutes.map((route, index)=>{
 
-            <Route path="/products" element={<ProductDetail />}>
-              <Route path=":name" element={<ProductDetail />}></Route>
-            </Route>
-            <Route path="/products" element={<Collection />} />
+              let Layout = MainLayout;
+              if( route.layout ){
+                Layout = route.layout;
+              }else if (route.layout === null){
+                Layout = OnlyContentLayout;
+              }
 
-            <Route path="/collection" element={<Collection />} />
-            <Route path="/" element={<Home />} />
+              const Page = route.component;
+
+              return <Route key={index} path={route.path} element={<Layout >
+                <Page />
+              </Layout>} />
+            })}
           </Routes>
           <ScrollButton />
         </div>
-        <Footer />
       </div>
-      {selectSiteShow && <Site />}
+      {siteIsShow && <Site />}
     </div>
   );
 }

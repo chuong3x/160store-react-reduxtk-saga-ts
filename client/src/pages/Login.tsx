@@ -1,8 +1,10 @@
-import Container from "components/Layout/Container";
-import { useEffect, useState } from "react";
-import AuthForm from "../features/auth/AuthForm";
 
-export default function Auth() {
+import RegisterForm from "features/auth/components/RegisterForm";
+import { useEffect, useState } from "react";
+import LoginForm from "../features/auth/components/LoginForm";
+
+
+export default function Login() {
   const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
@@ -11,10 +13,6 @@ export default function Auth() {
     setIsLogged(false);
   }, [isLogged]);
 
-  return (
-    <>
-      <AuthForm />;
-      <Container />
-    </>
-  );
+  return <LoginForm />;
+    
 }

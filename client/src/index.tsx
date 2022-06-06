@@ -5,7 +5,7 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from 'react-router-dom';
-import GlobeStyle from './components/Common/GlobeStyle'
+import GlobeStyle from './components/GlobeStyle'
 
 ReactDOM.render(
   <React.StrictMode>
