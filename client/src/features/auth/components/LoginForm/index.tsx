@@ -1,9 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { ChangeEvent, useState } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./LoginForm.module.scss";
+
 import Button from "components/Common/Button";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { ChangeEvent, useEffect, useState } from "react";
 import {
   authActions,
   LoginPayload,
@@ -13,7 +14,6 @@ import {
 
 export default function LoginForm() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const isLoging = useAppSelector(selectLogging);
   const loginStatus = useAppSelector(selectLoginStatus);
 
@@ -32,10 +32,7 @@ export default function LoginForm() {
   function handleChangeInput(e: ChangeEvent<HTMLInputElement>) {
     setLoginPayload({ ...loginPayload, [e.target.id]: e.target.value });
   }
-  useEffect(() => {
-    const isAccessToken = localStorage.getItem("accessToken");
-    if (isAccessToken) navigate("/admin");
-  });
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.wrapperBox}>

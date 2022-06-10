@@ -14,7 +14,6 @@ import { validateRegisterData } from "utils/validation";
 
 export default function RegisterForm() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const isRegistering = useAppSelector(selectRegistering);
   const registerStatus = useAppSelector(selectRegisterStatus);
 
@@ -54,12 +53,6 @@ export default function RegisterForm() {
   useEffect(() => {
     setRegisterPayload({ method: registerMethod, registerData: registerData });
   }, [registerMethod, registerData]);
-
-  useEffect(() => {
-    const isAccessToken = localStorage.getItem("accessToken");
-    if (registerStatus.status === "success" && isAccessToken)
-      navigate("/admin");
-  }, [registerStatus]);
 
   return (
     <div className={styles.wrapper}>

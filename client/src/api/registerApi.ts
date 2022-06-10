@@ -1,11 +1,11 @@
 import { RegisterPayload } from "features/auth/authSlice";
 import { User } from "models/user";
-import axiosClient from "./axiosClient";
+import axiosAuth from "./axiosAuth";
 
 const registerApi = {
   register(payload: RegisterPayload): Promise<User> {
     const url = "/register";
-    return axiosClient.post(url, payload);
+    return axiosAuth.post(url, payload);
   },
 };
 

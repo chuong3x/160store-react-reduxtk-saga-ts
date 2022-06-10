@@ -1,31 +1,11 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
 import { UserModel } from '../models/UserModel.js';
-import jwt from 'jsonwebtoken';
 
+import { generatePassword, generateTokens } from '../utils/auth.js';
+dotenv.config();
 //DEFINE
-const saltRounds = 10;
-const chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var passwordLength = 12;
-
-const generatePassword = () => {
-  let password;
-  for (let i = 0; i <= passwordLength; i++) {
-    let randomNumber = Math.floor(Math.random() * chars.length);
-    password += chars.substring(randomNumber, randomNumber +1);
-   }
-   return password;
-}
-
-const generateTokens =  (user, expiredTime)=>{
-  const payload = { firstName: user.firstName, lastName: user.lastName, email: user.email }
-  //create Tokens
-  const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: expiredTime,
-  });
-  const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET);
-  //Return token
-  return {accessToken, refreshToken}
-}
+const saltRounds = Number(process.env.SALT);
 
 // HANDLE CREATE, UPDATE USER
 export const createUser = async (req, res) => {
@@ -40,7 +20,7 @@ export const createUser = async (req, res) => {
             const payload = {...data.registerData}
             const tokens = generateTokens(payload, '10m');
             const tokenList = [tokens.refreshToken];
-            const user = new UserModel({...payload, password: hash, token: tokenList});
+            const user = new UserModel({...payload, password: hash, refreshTokens: tokenList});
             await user.save()
             res.cookie("refreshToken", tokens.refreshToken, {
               httpOnly: true,
@@ -61,15 +41,15 @@ export const createUser = async (req, res) => {
   }else if(data.method === 'phone'){
     const {phone} = data.registerData;
     try{
-      const phoneIsExiting = await UserModel.findOne({phone: phone});
-      if(!phoneIsExiting){
+      const isUserExit = await UserModel.findOne({phone: phone});
+      if(!isUserExit){
         const autoGeneratePass = generatePassword();
         bcrypt.hash(autoGeneratePass, saltRounds, async function(err, hash) {
           if(!err){
-            const payload = {...data.registerData}
+            const payload = {firstName: phone, lastName: 'User', email: '' }
             const tokens = generateTokens(payload, '10m');
             const tokenList = [tokens.refreshToken];
-            const user = new UserModel({...data.registerData, password: hash, token: tokenList});
+            const user = new UserModel({...payload, password: hash, token: tokenList});
             await user.save()
             res.cookie("refreshToken", tokens.refreshToken, {
               httpOnly: true,
@@ -147,17 +127,18 @@ export const login = async (req, res) => {
       bcrypt.compare(password, user.password, async function(err, result) {
         if(!err){
           if(result === true){
-            const tokens = generateTokens(user, '10m');
+            const tokens = generateTokens(user, '20s');
             //Save User token
-            const {token} = user;
-            const newTokenList = [ ...token, tokens.refreshToken]
-            await UserModel.updateOne({email: user.email},{token: newTokenList})
+            const {refreshTokens} = user;
+            const newTokenList = [ ...refreshTokens, tokens.refreshToken]
+            await UserModel.updateOne({email: user.email},{refreshTokens: newTokenList})
             //Response
             res.cookie("refreshToken", tokens.refreshToken, {
               httpOnly: true,
               secure:false,
               path: "/",
               sameSite: "strict",
+              expires: new Date( Date.now() + (365 * 24 * 60 * 60 * 1000)),
             });
             res.status(200).json({message: 'Đăng nhập thành công!', token: tokens.accessToken})
           }else{
@@ -172,17 +153,18 @@ export const login = async (req, res) => {
         if(!err){
           if(result === true){
             const payload = { firstName: user.firstName, lastName: user.lastName, email: user.email }
-            const tokens = generateTokens(payload, '10m');
+            const tokens = generateTokens(payload, '1m');
             //Save User token
-            const {token} = user;
-            const newTokenList = [ ...token, tokens.refreshToken]
-            await UserModel.updateOne({email: user.email},{token: newTokenList})
+            const { refreshTokens } = user;
+            const newTokenList = [ ...refreshTokens, tokens.refreshToken]
+            await UserModel.updateOne({email: user.email},{refreshTokens: newTokenList})
             //Response
             res.cookie("refreshToken", tokens.refreshToken, {
               httpOnly: true,
               secure:false,
               path: "/",
               sameSite: "strict",
+              expires: new Date( Date.now() + (365 * 24 * 60 * 60 * 1000))
             });
             res.status(200).json({message: 'Đăng nhập thành công!', token: tokens.accessToken})
           }else{
@@ -196,4 +178,51 @@ export const login = async (req, res) => {
   }
 };
 
+export const logout = async (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+  const userData = req.body;
+  try {
+    const user = await UserModel.findOne({email: userData.email});
+    if(user){
+      const { refreshTokens } = user;
+      const newTokenList = refreshTokens.filter((token) => token !== refreshToken)
+      await UserModel.updateOne({email: user.email},{refreshTokens: newTokenList})
+      res.clearCookie('refreshToken');
+      res.status(200).json({message: "Đăng xuất thành công"})
+    }else{
+      res.status(404).json({message: 'Không tìm thấy người dùng'})
+    }
+  } catch (error) {
+    res.status(500).json({error: error})
+  }
 
+}
+
+//HANDLE REFRESH TOKEN
+export const refreshToken = async (req, res) => {
+  const payload = req.user;
+  const tokens = generateTokens(payload, '20s')
+  try {
+    const user = await UserModel.findOne({email: payload.email});
+    const { refreshTokens } = user;
+    const removedOldToken = refreshTokens.filter((token) => token !== refreshToken)
+    const newTokenList = [...removedOldToken, tokens.refreshToken]
+    console.log(newTokenList);
+
+    await UserModel.updateOne({email: user.email}, {refreshTokens: newTokenList})
+
+    //Response
+    res.cookie("refreshToken", tokens.refreshToken, {
+      httpOnly: true,
+      secure:false,
+      path: "/",
+      sameSite: "strict",
+      expires: new Date( Date.now() + (365 * 24 * 60 * 60 * 1000)),
+    });
+    res.status(200).json({message: 'Làm mới token thành công!', token: tokens.accessToken})
+    
+  } catch (error) {
+    res.status(500).json({message: "Internal sever error", error})
+  }
+  
+};

@@ -1,5 +1,4 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { menuActions } from "features/menu/menuSlice";
 import {
   navigationActions,
   selectNavigation,

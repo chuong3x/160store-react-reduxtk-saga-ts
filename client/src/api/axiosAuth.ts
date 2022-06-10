@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-const axiosClient = axios.create({
-  baseURL: "http://localhost:5678",
+const axiosAuth = axios.create({
+  baseURL: "http://localhost:1289",
   headers: {
     "Content-Type": "application/json",
   },
@@ -9,7 +9,7 @@ const axiosClient = axios.create({
 });
 
 // Add a request interceptor
-axiosClient.interceptors.request.use(
+axiosAuth.interceptors.request.use(
   function (config: AxiosRequestConfig) {
     // Do something before request is sent
     return config;
@@ -21,7 +21,7 @@ axiosClient.interceptors.request.use(
 );
 
 // Add a response interceptor
-axiosClient.interceptors.response.use(
+axiosAuth.interceptors.response.use(
   function (response: AxiosResponse) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
@@ -34,4 +34,4 @@ axiosClient.interceptors.response.use(
   }
 );
 
-export default axiosClient;
+export default axiosAuth;

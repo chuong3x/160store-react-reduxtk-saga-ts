@@ -18,7 +18,7 @@ export default function Menu({ menuFor, isDropRight }: PropsMenu) {
   const menuState = categories.find((category) => category.name === menuFor);
   useEffect(() => {
     dispatch(menuActions.getCategory());
-  }, [dispatch]);
+  }, []);
   return (
     <ul className={clsx(styles.menu, { [styles.subMenu]: isDropRight })}>
       {menuState &&

@@ -3,16 +3,17 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
-import router from './routers/index.js';
-import db from './config/db.js';
+import { routerAuth } from './routers/index.js';
 
 dotenv.config()
 
 const app = express();
-const PORT = process.env.PORT || 4400;
+const PORT = process.env.AUTHPORT || 9900;
 const DBURL = process.env.DBURL;
 
+//Use middlewares
 app.use(bodyParser.json({ limit: '60mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '60mb' }));
 app.use(cors({
@@ -21,9 +22,20 @@ app.use(cors({
 }));
 app.use(cookieParser());
 
-db.connect(DBURL);
-router(app);
+//Connect DB
+mongoose
+.connect(DBURL, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => {
+  console.log('Connected to DB');
+})
+.catch((err) => {
+  console.log('err', err);
+});
 
+//use Routes
+routerAuth(app)
+
+//Run server
 app.listen(PORT, () => {
   console.log('Server is running on port:', PORT);
 });

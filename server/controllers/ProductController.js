@@ -11,17 +11,10 @@ function removeAccents(str) {
 export const getProducts = async (req, res) => {
   const query = req.query;
   try {
-    // const products = await ProductModel.find({"name" : new RegExp(query._filter, 'i') });
-    // const products = await ProductModel.find({
-    //   name: { $regex: query._filter, $options: "i"}
-    //   });
+
     const result = await ProductModel.find({});
     const products = result.filter((product)=> removeAccents(product.name).toLowerCase().includes(removeAccents(query._filter).toLowerCase())
     )
-
-    // const products = await ProductModel.find({ $text : { $search : `\"${query._filter}\"`,
-    //   $caseSensitive: true,
-    //   $diacriticSensitive: false}})
 
     console.log(query._filter,products)
     res.status(200).json({data: products});

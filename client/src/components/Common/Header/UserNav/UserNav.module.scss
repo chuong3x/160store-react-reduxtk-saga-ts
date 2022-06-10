@@ -13,6 +13,7 @@
     font-size: 24px;
 
     &Info {
+      display: none;
       position: absolute;
       top: 100%;
       right: 0;
@@ -30,6 +31,7 @@
         height: 40px;
         padding: 10px 20px;
         font-size: 14px;
+        color: var(--text-color);
         transition: linear 0.2s;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
@@ -44,6 +46,12 @@
     }
     &Icon {
       color: var(--text-color);
+    }
+  }
+  .loggedIn {
+    &:hover > div:last-child {
+      display: flex;
+      flex-direction: column;
     }
   }
 

@@ -1,10 +1,18 @@
-import { LoginPayload, LoginResponse } from "features/auth/authSlice";
-import axiosClient from "./axiosClient";
+import {
+  LoginPayload,
+  RefreshPayload,
+  SuccessResponse,
+} from "features/auth/authSlice";
+import axiosAuth from "./axiosAuth";
 
 const loginApi = {
-  login(payload: LoginPayload): Promise<LoginResponse> {
+  login(payload: LoginPayload): Promise<SuccessResponse> {
     const url = "/login";
-    return axiosClient.post(url, payload);
+    return axiosAuth.post(url, payload);
+  },
+  refreshToken(payload: RefreshPayload): Promise<SuccessResponse> {
+    const url = "/refresh";
+    return axiosAuth.post(url, payload);
   },
 };
 
