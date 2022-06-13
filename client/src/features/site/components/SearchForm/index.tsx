@@ -1,6 +1,7 @@
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppDispatch } from "app/hooks";
+import { useDebounce } from "hooks";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Result from "./Result";
@@ -15,12 +16,13 @@ export default function SearchForm() {
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setSearchState(e.target.value);
   };
+  const debounce = useDebounce(searchState, 600);
 
   useEffect(() => {
     if (searchState) {
-      dispatch(searchActions.getSearch({ _filter: searchState }));
+      dispatch(searchActions.getSearch({ _filter: debounce }));
     }
-  }, [dispatch, searchState]);
+  }, [debounce]);
 
   return (
     <div className={styles.group}>

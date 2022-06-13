@@ -46,7 +46,7 @@ export const createUser = async (req, res) => {
         const autoGeneratePass = generatePassword();
         bcrypt.hash(autoGeneratePass, saltRounds, async function(err, hash) {
           if(!err){
-            const payload = {firstName: phone, lastName: 'User', email: '' }
+            const payload = {firstName: phone, lastName: 'User', email: '', phone }
             const tokens = generateTokens(payload, '10m');
             const tokenList = [tokens.refreshToken];
             const user = new UserModel({...payload, password: hash, token: tokenList});

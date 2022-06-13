@@ -11,7 +11,6 @@ function removeAccents(str) {
 export const getProducts = async (req, res) => {
   const query = req.query;
   try {
-
     const result = await ProductModel.find({});
     const products = result.filter((product)=> removeAccents(product.name).toLowerCase().includes(removeAccents(query._filter).toLowerCase())
     )

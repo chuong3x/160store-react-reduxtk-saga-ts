@@ -44,7 +44,6 @@ export default function UserNav() {
       setUser(initialUser);
     }
   }, [isLoggedIn]);
-  console.log(isLoggedIn);
 
   const handleLogout = () => {
     dispatch(authActions.logout(user));

@@ -1,6 +1,5 @@
 import express from 'express';
 import * as Product from '../controllers/ProductController.js';
-import { verifyAccessToken } from '../utils/auth.js';
 
 const router = express.Router();
 

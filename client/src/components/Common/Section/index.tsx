@@ -4,7 +4,7 @@ import {
   sectionActions,
   selectSectionProducts,
 } from "features/section/sectionSlice";
-import { ListParams, Section, SectionProductsPayload } from "models";
+import { Section, SectionProductsPayload } from "models";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Section.module.scss";
