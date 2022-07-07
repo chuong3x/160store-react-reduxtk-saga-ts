@@ -1,0 +1,15 @@
+.checked {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-left: 8px solid transparent;
+  border-top: 8px solid transparent;
+  border-right: 8px solid red;
+  border-bottom: 8px solid red;
+  align-content: center;
+
+  &Icon {
+    position: absolute;
+    transform: translateX(-3px) translateY(-3px);
+  }
+}

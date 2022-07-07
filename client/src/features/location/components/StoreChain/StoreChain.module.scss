@@ -1,0 +1,70 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 1200px;
+  margin: 44px auto;
+  font-family: "Montserrat", sans-serif;
+}
+.title {
+  font-size: 36px;
+}
+.group {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 24px -10px;
+  height: 450px;
+}
+.location {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  padding: 0 10px;
+
+  &:first-child {
+    flex-grow: 1;
+  }
+}
+
+.name {
+  display: flex;
+  width: 100%;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 30px 0px 20px 20px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #d0d0d0;
+}
+.store {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid #000000;
+  height: 100px;
+  width: 100%;
+  padding: 10px;
+
+  &Name {
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+.address {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.phone {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}

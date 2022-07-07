@@ -9,6 +9,10 @@ import searchReducer from "features/site/components/SearchForm/searchSlice";
 import sliderReducer from "features/slider/sliderSlice";
 import sectionReducer from "features/section/sectionSlice";
 import authReducer from "features/auth/authSlice";
+import galleryReducer from "features/gallery/gallerySlice";
+import guideReducer from "features/guide/guideSlice";
+import cartReducer from "features/cart/cartSlice";
+import locationReducer from "features/location/locationSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -21,6 +25,10 @@ export const store = configureStore({
     slider: sliderReducer,
     section: sectionReducer,
     auth: authReducer,
+    gallery: galleryReducer,
+    guide: guideReducer,
+    cart: cartReducer,
+    location: locationReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

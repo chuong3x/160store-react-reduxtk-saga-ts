@@ -6,3 +6,6 @@ export * from "./slide";
 export * from "./section";
 export * from "./user";
 export * from "./tokens";
+export * from "./image";
+export * from "./store";
+export * from "./location";

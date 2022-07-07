@@ -12,7 +12,6 @@ function* getSearchSaga(action: PayloadAction<ListParams>) {
     );
     yield put(searchActions.getSearchSuccess(response));
   } catch (err) {
-    console.log("Failed to get search", err);
     yield put(searchActions.getSearchFailed());
   }
 }

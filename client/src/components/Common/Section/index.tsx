@@ -4,7 +4,7 @@ import {
   sectionActions,
   selectSectionProducts,
 } from "features/section/sectionSlice";
-import { Section, SectionProductsPayload } from "models";
+import { Product, Section, SectionProductsPayload } from "models";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Section.module.scss";
@@ -13,6 +13,28 @@ import SectionProducts from "./SectionProducts";
 interface PropsSection {
   sections: Section[];
 }
+
+//fake API
+const products: Product[] = [
+  {
+    _id: "62ab30221a01829ee1152cdd",
+    brand: "Charlie Super",
+    name: "Mắt Kính ICON DENIM Aviator Light-Frame",
+    price: 380000,
+    image:
+      "https://res.cloudinary.com/hanco3x/image/upload/v1648826569/106store/products/kinh-trang_ypx4rp.webp",
+    product_link: "mat kinh icon denim aviator light frame",
+    description:
+      "ICON DENIM Aviator Light-Frame Glasses //\n\nNgoài công dụng bảo vệ mắt khỏi khói bụi và thời tiết, thì thiết kế lần này có sự cải tiến phần gọng kính chắc chắn,form kính ôm vào sống mũi làm nổi bật đường nét trên gương mặt, tăng sự mềm mại bằng miếng đệm mũi cao su nên ae yên tâm về độ thoải mái khi đeo.\n",
+    rating: 5.0,
+    category: "kinh",
+    product_colors: [{ name: "red", image: "" }],
+    product_code: "KIID0013-01",
+    onSale: true,
+    salePercent: 20,
+    product_sizes: ["S"],
+  },
+];
 
 export default function Sections({ sections }: PropsSection) {
   const dispatch = useAppDispatch();
@@ -35,7 +57,7 @@ export default function Sections({ sections }: PropsSection) {
         dispatch(sectionActions.getSectionProducts(payloadData));
       });
     }
-  }, [productsStore, sections]);
+  }, []);
 
   return (
     <>
@@ -63,7 +85,7 @@ export default function Sections({ sections }: PropsSection) {
               />
             </div>
           )}
-          <SectionProducts products={productsStore[section.name]} />
+          <SectionProducts products={products} />
           <div className={styles.expland}>
             <button
               className={styles.explandButton}

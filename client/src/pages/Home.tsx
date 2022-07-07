@@ -1,10 +1,13 @@
-import Slider from "../features/slider";
-import Container from "../components/Common/Container";
-import Sections from "../components/Common/Section";
-import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import Slider from "../features/slider";
 import { selectSlides, sliderActions } from "features/slider/sliderSlice";
 import { Section } from "models";
+
+import Container from "../components/Common/Container";
+import Sections from "../components/Common/Section";
 
 const fakeSection: Section[] = [
   {
@@ -55,11 +58,18 @@ const fakeSection: Section[] = [
 ];
 
 export default function Home() {
+  const navigate = useNavigate();
+  const param = useParams();
   const dispatch = useAppDispatch();
   const sliderState = useAppSelector(selectSlides);
+
   useEffect(() => {
+    if (param) {
+      navigate("/");
+    }
+
     dispatch(sliderActions.getSlides());
-  }, [dispatch]);
+  }, [navigate]);
 
   return (
     <>

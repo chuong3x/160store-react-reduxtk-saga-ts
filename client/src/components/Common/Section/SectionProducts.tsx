@@ -1,5 +1,6 @@
 import { Product } from "models";
 import { Link } from "react-router-dom";
+import { formater } from "utils/formater";
 
 import styles from "./Section.module.scss";
 
@@ -26,9 +27,9 @@ export default function SectionProducts({ products }: PropsSectionProducts) {
             </div>
             <div className={styles.productItemInfo}>
               <div className={styles.productItemInfoName}>{product.name}</div>
-              <span
-                className={styles.productItemInfoPrice}
-              >{`${product.price}đ`}</span>
+              <span className={styles.productItemInfoPrice}>{`${formater.format(
+                product.price
+              )}đ`}</span>
             </div>
           </Link>
         ))

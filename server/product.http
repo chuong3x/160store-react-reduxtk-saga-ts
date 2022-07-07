@@ -14,3 +14,17 @@ content-type: application/json
     "": "sample",
     "time": "Wed, 21 Oct 2015 18:27:50 GMT"
 }
+
+###
+GET http://localhost:5678/locations/
+
+###
+POST http://localhost:5678/locations/
+
+content-type: application/json
+
+{
+    "location_id": "1",
+    "name": "tp ho chi minh",
+    "stores": "62c444b4484ef59880634f0d"
+}

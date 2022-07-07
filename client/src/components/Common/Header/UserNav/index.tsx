@@ -1,34 +1,41 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import jwtdecode from "jwt-decode";
 import clsx from "clsx";
-import SVGCart from "./cart";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import {
   faCircleUser,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
+import SVGCart from "./cart";
 import styles from "./UserNav.module.scss";
+
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { siteActions } from "features/site/siteSlice";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { User } from "models";
 import { authActions, selectIsLoggedIn } from "features/auth/authSlice";
+import { selectCartProducts } from "features/cart/cartSlice";
 
 export default function UserNav() {
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const storageProduct = useAppSelector(selectCartProducts);
 
   const initialUser: User = {
     firstName: "",
     lastName: "",
     email: "",
   };
+
   const [user, setUser] = useState(initialUser);
 
   const handleShowSite = (showFor: string) => {
     dispatch(siteActions.show(showFor));
+  };
+  const handleLogout = () => {
+    dispatch(authActions.logout(user));
   };
 
   useEffect(() => {
@@ -44,10 +51,6 @@ export default function UserNav() {
       setUser(initialUser);
     }
   }, [isLoggedIn]);
-
-  const handleLogout = () => {
-    dispatch(authActions.logout(user));
-  };
 
   return (
     <div className={styles.util}>
@@ -86,7 +89,9 @@ export default function UserNav() {
           <SVGCart />
         </div>
         <div className={styles.utilCartCounter}>
-          <span className={styles.utilCartCounterText}>0</span>
+          <span className={styles.utilCartCounterText}>
+            {storageProduct.length}
+          </span>
         </div>
       </div>
     </div>

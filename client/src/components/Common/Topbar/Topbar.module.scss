@@ -49,3 +49,23 @@
     }
   }
 }
+
+.shake {
+  transition: all linear 0.25s;
+  animation: shakeIn ease-in-out 1s infinite;
+}
+
+@keyframes shakeIn {
+  0% {
+    transform: rotateZ(-35deg);
+  }
+  25% {
+    transform: rotateZ(30deg);
+  }
+  40% {
+    transform: rotateZ(-10deg);
+  }
+  100% {
+    transform: rotateZ(0);
+  }
+}

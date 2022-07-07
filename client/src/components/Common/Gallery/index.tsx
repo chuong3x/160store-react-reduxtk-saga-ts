@@ -1,35 +1,67 @@
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import clsx from "clsx";
+import { useState, useEffect } from "react";
+
+import { galleryActions } from "features/gallery/gallerySlice";
+import { Image } from "models";
 import styles from "./Gallery.module.scss";
-export default function Gallery() {
+
+interface GalleryProps {
+  images: Image[];
+}
+
+export interface GalleryPayload {
+  images: Image[];
+  currentIndex: number;
+}
+
+export default function Gallery({ images }: GalleryProps) {
+  const dispatch = useAppDispatch();
+
+  const [active, setActive] = useState(images[0]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleSelectImage = (e: React.MouseEvent<HTMLDivElement>) => {
+    const index = images.findIndex(
+      (image) => image.image_id === e.currentTarget.id
+    );
+    setActive(images[index]);
+    setCurrentIndex(index);
+  };
+  const handleClickImage = () => {
+    dispatch(galleryActions.show({ images, currentIndex }));
+  };
+
+  useEffect(() => {
+    return () => {
+      dispatch(galleryActions.hide());
+    };
+  }, [dispatch]);
+
   return (
     <div className={styles.gallery}>
       <div className={styles.list}>
-        <div className="gallery-list-item">
-          <a href="" className="gallery-list-item__link">
-            <img
-              className="gallery-list-item__link-image"
-              src="./assets/images/products/img_9073_7163f41dafb74edc85e2bd76bbd59f7d_compact.webp"
-              alt=""
-            />
-          </a>
-        </div>
-        <div className="gallery-list-item">
-          <a href="" className="gallery-list-item__link">
-            <img
-              className="gallery-list-item__link-image"
-              src="./assets/images/products/img_9077_06f4f49a16ba4d038d55d7b5088bd9b1_compact.webp"
-              alt=""
-            />
-          </a>
-        </div>
+        {images &&
+          images.map((image) => (
+            <div
+              key={image.image_id}
+              id={image.image_id}
+              className={clsx(
+                styles.listItem,
+                active === image && styles.active
+              )}
+              onClick={handleSelectImage}
+            >
+              <img className={styles.listItemImage} src={image.src} alt="" />
+            </div>
+          ))}
       </div>
-      <div className="gallery-view">
-        <div className="gallery-view-item">
-          <img
-            className="gallery-view-item__image"
-            src="./assets/images/products/img_9071_304bc41a913647c8acc7c9a3fe8a841c_master.webp"
-            alt=""
-          />
-        </div>
+      <div className={styles.view}>
+        <img
+          className={styles.viewImage}
+          src={active.src}
+          onClick={handleClickImage}
+        />
       </div>
     </div>
   );

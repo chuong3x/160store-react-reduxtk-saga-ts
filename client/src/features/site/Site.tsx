@@ -1,10 +1,12 @@
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import SearchForm from "./components/SearchForm";
-import styles from "./Site.module.scss";
-import { selectShowFor, selectSiteShow, siteActions } from "./siteSlice";
-import { faTrashCan, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
+
+import styles from "./Site.module.scss";
+
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import SearchForm from "./components/SearchForm";
+import { selectShowFor, selectSiteShow, siteActions } from "./siteSlice";
 import CartForm from "./components/CartForm";
 
 export default function Site() {

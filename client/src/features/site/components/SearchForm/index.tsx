@@ -20,7 +20,9 @@ export default function SearchForm() {
 
   useEffect(() => {
     if (searchState) {
-      dispatch(searchActions.getSearch({ _filter: debounce }));
+      dispatch(
+        searchActions.getSearch({ _filter: encodeURIComponent(debounce) })
+      );
     }
   }, [debounce]);
 
@@ -36,7 +38,7 @@ export default function SearchForm() {
         ></input>
         <Link
           className={styles.searchBtn}
-          to={`/search?_filter=${searchState}`}
+          to={`/search?_filter=${encodeURIComponent(searchState)}`}
         >
           <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
         </Link>

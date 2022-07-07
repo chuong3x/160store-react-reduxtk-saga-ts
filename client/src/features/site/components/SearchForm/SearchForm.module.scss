@@ -84,13 +84,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 40px;
-      width: 40px;
 
       &Img {
         display: block;
-        height: 100%;
-        width: 100%;
         object-fit: cover;
       }
     }

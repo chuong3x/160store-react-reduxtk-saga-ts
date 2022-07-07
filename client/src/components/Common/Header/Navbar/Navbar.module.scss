@@ -40,6 +40,10 @@
       }
       &Dropdown {
         position: relative;
+        transition: all linear 0.15s;
+        & > div div {
+          transition: all linear 0.15s;
+        }
 
         &:hover {
           & > ul {
@@ -47,9 +51,11 @@
           }
           & > div div {
             transform: rotateZ(180deg);
-            transition: all linear 0.15s;
           }
         }
+      }
+      &:hover {
+        border-bottom: 2px solid rgba($color: #000000, $alpha: 0.6);
       }
     }
   }
